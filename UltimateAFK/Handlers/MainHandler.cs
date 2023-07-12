@@ -5,6 +5,7 @@ using PlayerStatsSystem;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
+using SCPPets.Commands;
 using System.Collections.Generic;
 using UltimateAFK.Resources;
 using UltimateAFK.Resources.Component;
@@ -55,6 +56,8 @@ namespace UltimateAFK.Handlers
             try
             {
                 if (player == null || newRole == RoleTypeId.Spectator || !ReplacingPlayersData.TryGetValue(player.UserId, out var data))
+                    return;
+                if (player.GetComponent<Bot>() != null)
                     return;
 
                 Log.Debug($"Detecting player {player.Nickname} ({player.UserId}) who replaced a player {data.NickName} who was afk", UltimateAFK.Singleton.Config.DebugMode);
@@ -141,7 +144,7 @@ namespace UltimateAFK.Handlers
         [PluginEvent(ServerEventType.PlayerDeath)]
         private void OnPlayerDeath(Player player, Player attacker, DamageHandlerBase damageHandler)
         {
-            if (player != null && ReplacingPlayersData.TryGetValue(player.UserId, out _))
+            if (player.GetComponent<Bot>() != null && player != null && ReplacingPlayersData.TryGetValue(player.UserId, out _))
             {
                 ReplacingPlayersData.Remove(player.UserId);
             }

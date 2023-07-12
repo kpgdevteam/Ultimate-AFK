@@ -1,7 +1,6 @@
 using CommandSystem;
 using CustomPlayerEffects;
 using MapGeneration;
-using NWAPIPermissionSystem;
 using PlayerRoles;
 using PlayerRoles.PlayableScps.Scp079;
 using PluginAPI.Core;
@@ -168,7 +167,7 @@ namespace UltimateAFK.Command
 
             foreach (var player in Player.GetPlayers())
             {
-                if (player is null || player.IsAlive || player.UserId == afkUserId || player.CheckPermission("uafk.ignore") || player.IsServer || player.UserId.Contains("@server")
+                if (player is null || player.IsAlive || player.UserId == afkUserId || player.IsServer || player.UserId.Contains("@server")
                     || UltimateAFK.Singleton.Config.IgnoreOverwatch && player.IsOverwatchEnabled || MainHandler.ReplacingPlayersData.TryGetValue(player.UserId, out _))
                     continue;
 

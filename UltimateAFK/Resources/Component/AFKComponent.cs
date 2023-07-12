@@ -1,5 +1,4 @@
 ﻿using MEC;
-using NWAPIPermissionSystem;
 using PlayerRoles;
 using PlayerRoles.PlayableScps.Scp079;
 using PlayerRoles.PlayableScps.Scp096;
@@ -261,7 +260,7 @@ namespace UltimateAFK.Resources.Component
                 {
                     if(player is null) continue;
 
-                    if (player.IsAlive || player == Owner || player.CheckPermission("uafk.ignore") || player.IsServer || player.UserId.Contains("@server")
+                    if (player.IsAlive || player == Owner || player.IsServer || player.UserId.Contains("@server")
                         || Plugin.Config.IgnoreOverwatch && player.IsOverwatchEnabled || MainHandler.ReplacingPlayersData.TryGetValue(player.UserId, out _))
                         continue;
 
